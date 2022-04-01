@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Template</title>
+</head>
+<body>
+
+<div th:text="${dateActuelle}" style="text-align: right;"></div>  
+
+<center><h3>A l’aimable attention de la Direction Générale</h3></center>
+
+<p>Objet : <b>Demande de Stage PFE</b></p>
+
+<p>Madame, Monsieur,</p>
+
+<p>L’Ecole Supérieure Privée d’Ingénierie et de Technologies, ESPRIT SA, est un établissement
+d’enseignement supérieur privé ayant pour objet principal, la formation d’ingénieurs dans les
+domaines des technologies de l’information et de la communication.</p>
+
+<p>Notre objectif consiste à former des ingénieurs opérationnels dès leur sortie d’école.</p>
+
+<p>C’est dans ce but que nous encourageons nos élèves à mettre en pratique le savoir qu’ils ont
+acquis au cours de leur cursus universitaire.</p>
+
+<p>C’est également dans le but de les amener à s’intégrer dans l’environnement de l’entreprise
+que nous vous demandons de bien vouloir accepter :</p>
+
+<div style="text-align: center;"><b>L’étudiant(e) : <span th:text="${nom_prenomEtudiant}"></span></b></div>
+
+<div style="text-align: center;"><b>Inscrit(e) en : 5ème Informatique</b></div>
+
+<p>pour effectuer un stage obligatoire de PFE au sein de votre honorable société.
+Nous restons à votre entière disposition pour tout renseignement complémentaire.</p>
+
+<p>En vous remerciant pour votre précieux soutien, nous vous prions d’agréer, Madame,
+Monsieur, l’expression de nos salutations distinguées.</p>
+
+<div style="text-align: left;">Chef de Département des Stages</div>
+
+</body>
+</html>

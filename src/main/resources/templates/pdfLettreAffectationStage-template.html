@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Template</title>
+</head>
+<body>
+
+<div th:text="${dateActuelle}" style="text-align: right;"></div>  
+
+<center><h1>Lettre d’affectation</h1></center>
+
+<p>Suite à l’accord de la Société : <b><span th:text="${nomSociete}"></span></b></p>
+
+<div style="text-align: center;"><b>L’étudiant(e) : <span th:text="${nom_prenomEtudiant}"></span></b></div>
+
+<div style="text-align: center;"><b>Inscrit(e) en : 5ème Informatique</b></div>
+
+<p>Est affectée à "<b><span th:text="${nomSociete}"></span></b>" pour effectuer un stage obligatoire, et ce du <b><span th:text="${dateDebutStage}"></span> au
+ <span th:text="${dateFinStage}"></span></b>.</p>
+
+<p>Par ailleurs, il/elle est assuré(e) auprès de la GAT Assurances par le contrat N°201209100016.</p>
+
+<div style="text-align: left;">Chef de Département des Stages</div>
+
+</body>
+</html>

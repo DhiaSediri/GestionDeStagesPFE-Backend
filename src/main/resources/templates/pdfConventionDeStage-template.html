@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Template</title>
+</head>
+<body>
+
+<center><h1>CONVENTION DE STAGE</h1></center>
+
+<p>Entre :</p>
+
+<p><b>1- ECOLE SUPERIEURE PRIVEE D'INGENIERIE ET DE TECHNOLOGIES</b></p>
+
+<p>Représentée par son Directeur</p>
+
+<p>ci-après dénommée l'école',</p>
+
+<p>La Société : <b><span th:text="${nomSociete}"></span></b></p>
+
+<p>Adresse : <b><span th:text="${adresseSociete}"></span></b></p>
+
+<p>Téléphone : <b><span th:text="${telephoneSociete}"></span></b></p>
+
+<p>Représenté(e) par : <b><span th:text="${encadrantSociete}"></span></b></p>
+
+<p>Adresse électronique : <b><span th:text="${emailSociete}"></span></b></p>
+
+<p>Ci-après dénommé(e) l’entreprise,</p>
+
+<p><b>2- L’étudiant(e) : <span th:text="${nom_prenomEtudiant}"></span></b></p>
+
+<p><b>3- Inscrit(e) à notre école en cinquième année option : <span th:text="${optionEtudiant}"></span></b></p>
+
+<p>En vue d’obtenir le Diplôme National d’Ingénieur en Informatique</p>
+
+<p>Ci-après dénommé étudiant(e)</p>
+
+<p>Il a été arrêté et convenu ce qui suit :</p>
+
+<p><b>ARTICLE 1(objet de la convention) : La présente convention règle les rapports entre notre école, l’entreprise et l’étudiant
+pour ce qui concerne le stage d’été que l’étudiant est appelé à effectuer au sein de l’entreprise.</b></p>
+
+<p><b>ARTICLE 2 (objet du PFE) - Le stage de PFE a pour objet essentiel l'application pratique de l'enseignement dispensé
+à notre école, il s'effectue sous la direction d'un encadrant technique de l'entreprise.</b></p>
+
+<p><b>ARTICLE 3 (Programme) - Le programme du PFE, fera l’objet d’une étude par le comité de validation de notre école en
+concertation avec l’encadrant de l’entreprise.</b></p>
+
+<p><b>ARTICLE 4 (statut de l’étudiant) - Pendant la durée de son séjour en entreprise, l’étudiant conserve son statut
+d'étudiant. Toutefois, Il doit se conformer au règlement intérieur de l’entreprise et à ses règles d’usage.</b></p>
+
+<p><b>ARTICLE 5 (résiliation) -</b></p>
+
+<p><b>5.1 Rupture à l'initiative du stagiaire</b></p>
+
+<p><b>Le stagiaire peut rompre la convention de stage après avoir obtenu l'accord express et non équivoque du maître de
+stage et informé la direction des stages de notre école.</b></p>
+
+<p><b>5.2 Suspension ou rupture pour raisons médicales</b></p>
+
+<p><b>Le stage peut être suspendu ou interrompu pour raisons médicales. Dans ce cas, un avenant comportant les
+aménagements requis ou la rupture de la convention de stage sera conclu.</b></p>
+
+<p><b>5.3 Rupture pour manquement à la discipline</b></p>
+
+<p><b>En cas de manquement à la discipline de l'entreprise par le stagiaire, le chef d'entreprise se réserve le droit de mettre
+fin au stage après en avoir informé le responsable de l'établissement d'enseignement.</b></p>
+
+<p><b>ARTICLE 6 (Protection sociale) - L’étudiant conserve sa protection sociale dans le cadre du contrat d’assurance
+souscrit par notre école au profit de ses étudiants. En cas d’accident dans l’entreprise ou au cours du trajet, l’entreprise
+informe immédiatement le service scolarité de notre école.</b></p>
+
+<p><b>ARTICLE 7 (évaluation) – Les modalités de validation du PFE sont définies dans le cadre des modalités de contrôle des
+connaissances. L’activité de l’étudiant fera l’objet d’une évaluation. Une fiche d’évaluation sera remplie par l’organisme
+d’accueil et le responsable pédagogique.</b></p>
+
+<p><b>ARTICLE 8 (Rapport du stage ) – A la fin du stage, l’étudiant déposera à l’entreprise un rapport de stage. De même
+l’étudiant doit déposer à notre école un rapport de stage visé par l’entreprise et le responsable pédagogique qui aura assuré
+le suivi de l’étudiant. Le rapport de stage fera l’objet d’une soutenance orale devant le jury et une notation. 
+Cette soutenance est publique sauf dérogation pour cause de confidentialité sur demande motivée du responsable de
+l’entreprise. A la fin du stage, l’entreprise délivrera une attestation à l’étudiant précisant la nature du PFE et sa durée.</b></p>
+
+<p><b>ARTICLE 9 (confidentialité) – L’étudiant sera tenu, aussi bien pendant la durée du stage qu'après celui-ci, à observer le
+secret professionnel à l'égard des tiers pour tout ce qui concerne son activité pendant son PFE et d'une façon plus
+générale pour tout ce dont il aurait eu connaissance directement ou indirectement à l'occasion de celui-ci, le contenu des
+documents qu'il aurait rédigés lui-même ou qui pourrait lui être remis par l'entreprise restant bien entendu la propriété de
+celle-ci.</b></p>
+
+<p><b>ARTICLE 10 (consentement) - La présente convention est préalablement portée à la connaissance de l’étudiant ou de
+son représentant légal, s'il est mineur, pour consentement express relatif aux clauses ci-dessus énoncées.</b></p>
+
+<p><b>ARTICLE 11 (Organisation du STAGE) – Le stage se déroulera selon l’organisation suivante :</b></p>
+
+<p>Le stage aura lieu du <b><span th:text="${dateDebutStage}"></span> au <span th:text="${dateFinStage}"></span></b></p>
+
+<p><b>Département Informatique</b></p>
+
+<p>Encadrant technique dans l’entreprise : <b><span th:text="${encadrantSociete}"></span></b></p>
+
+<p>Encadrant pédagogique de notre école : <b><span th:text="${encadrantAcademique}"></span></b></p>
+
+<table border="3">
+        <tr>
+            <td>
+            	<p>A ......................... le ...........................</p>
+            	<p>Le Directeur de l’Entreprise(ou
+				   organisme) ou représentant et
+                   cachet</p>
+            </td>
+            <td>
+            	<p>A Tunis, <span th:text="${dateActuelle}"></span></p>
+            	<p>Le Directeur De L'école</p>
+            </td>
+            <td>
+            	<p>A ......................... le ...........................</p>
+            	<p>L’étudiant</p>
+            </td>
+        </tr>
+</table>
+
+</body>
+</html>

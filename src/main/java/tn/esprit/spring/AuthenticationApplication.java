@@ -48,6 +48,33 @@ public class AuthenticationApplication implements ApplicationRunner {
 		roles.add(adminRole);
 		User admin = new User("dhia", "mohameddhia.sediri@esprit.tn", encoder.encode("123123123"), roles); 	
 		userRepository.save(admin);*/
+		
+		/*Role studentRole = roleRepository.findByName(ERole.Student).get();
+		Set<Role> roles= new HashSet<Role>();
+		roles.add(studentRole);
+		User student = new User("mohamed", "mohamed.sediri@esprit.tn", encoder.encode("student"), roles); 	
+		userRepository.save(student);*/
+		
+		/*Role academic_SupervisorRole = roleRepository.findByName(ERole.Academic_Supervisor).get();
+		Set<Role> roles= new HashSet<Role>();
+		roles.add(academic_SupervisorRole);
+		User academic_Supervisor = new User("amin", "amin.sediri@esprit.tn", encoder.encode("encadrant"), roles); 	
+		userRepository.save(academic_Supervisor);*/
+	}
+	
+	@Bean
+	@SuppressWarnings("unchecked")
+	public FilterRegistrationBean simpleCorsFilter() {
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+		config.setAllowedMethods(Collections.singletonList("*"));
+		config.setAllowedHeaders(Collections.singletonList("*"));
+		source.registerCorsConfiguration("/**", config);
+		FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		return bean;
 	}
 
 }
