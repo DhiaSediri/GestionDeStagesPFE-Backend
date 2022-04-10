@@ -10,6 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -32,12 +33,12 @@ public class DocumentsDeStage {
 	public String nomSociete;
 	
 	@NotBlank
-	@Size(max = 50)	
+	@Size(max = 30)	
 	public String adresseSociete;
 	
 	@NotBlank
-	@Size(max = 8)
-	public Long telephoneSociete;
+	@Pattern(regexp = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$")
+	public String telephoneSociete;
 	
 	@NotBlank
 	@Size(max = 50)
@@ -62,7 +63,7 @@ public class DocumentsDeStage {
 
 	public DocumentsDeStage() {}
 
-	public DocumentsDeStage(String nom_prenomEtudiant, String optionEtudiant, String nomSociete, String adresseSociete, Long telephoneSociete, 
+	public DocumentsDeStage(String nom_prenomEtudiant, String optionEtudiant, String nomSociete, String adresseSociete, String telephoneSociete, 
 			String emailSociete, String encadrantSociete, String encadrantAcademique, Date dateDebutStage, Date dateFinStage) {
 		this.nom_prenomEtudiant = nom_prenomEtudiant;
 		this.optionEtudiant = optionEtudiant;
@@ -116,11 +117,11 @@ public class DocumentsDeStage {
 		this.adresseSociete = adresseSociete;
 	}
 
-	public Long getTelephoneSociete() {
+	public String getTelephoneSociete() {
 		return telephoneSociete;
 	}
 
-	public void setTelephoneSociete(Long telephoneSociete) {
+	public void setTelephoneSociete(String telephoneSociete) {
 		this.telephoneSociete = telephoneSociete;
 	}
 

@@ -103,7 +103,7 @@ public class PDFCreator {
         renderer.setDocumentFromString(xHtml, baseUrl);
         renderer.layout();
 
-        OutputStream outputStream = new FileOutputStream("src//DemandeDeStage" + documentsDeStage.getNom_prenomEtudiant() + ".pdf");
+        OutputStream outputStream = new FileOutputStream("src//DemandeDeStage-" + documentsDeStage.getNom_prenomEtudiant() + ".pdf");
         renderer.createPDF(outputStream);
         outputStream.close();
 

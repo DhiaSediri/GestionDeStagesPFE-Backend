@@ -4,18 +4,24 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.MultipartConfigElement;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.unit.DataSize;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import tn.esprit.spring.controllers.UserController;
 import tn.esprit.spring.models.ERole;
@@ -62,6 +68,7 @@ public class AuthenticationApplication implements ApplicationRunner {
 		userRepository.save(academic_Supervisor);*/
 	}
 	
+	//ajouter pour generer PDF
 	@Bean
 	@SuppressWarnings("unchecked")
 	public FilterRegistrationBean simpleCorsFilter() {
@@ -76,5 +83,24 @@ public class AuthenticationApplication implements ApplicationRunner {
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		return bean;
 	}
-
+	
+	/*// ajouter pour upload file
+	@Bean
+	MultipartConfigElement multipartConfigElement() {
+		MultipartConfigFactory factory = new MultipartConfigFactory();
+	    factory.setMaxFileSize(DataSize.ofKilobytes(512));
+	    factory.setMaxRequestSize(DataSize.ofKilobytes(512));
+	    return factory.createMultipartConfig();
+	}
+	// ajouter pour upload file
+	@Bean
+	WebMvcConfigurer corsConfigurer() {
+	    return new WebMvcConfigurer() {
+	        @Override
+	        public void addCorsMappings(CorsRegistry registry) {
+	            registry.addMapping("/api/files/uploadFile").allowedOrigins("http://localhost:4200");
+	        }
+	    };
+	}*/
+	
 }

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.spring.authJwt.JwtUtils;
 import tn.esprit.spring.authRequest.LoginRequest;
 import tn.esprit.spring.authRequest.SignupRequest;
+import tn.esprit.spring.authRequest.SignupRequestEdit;
 import tn.esprit.spring.authResponse.JwtResponse;
 import tn.esprit.spring.authResponse.MessageResponse;
 import tn.esprit.spring.authService.UserDetailsImpl;
@@ -93,19 +94,19 @@ public class AuthController {
 			strRoles.forEach(role -> {
 				switch (role) {
 				
-				case "admin":
+				case "Admin":
 					Role adminRole = roleRepository.findByName(ERole.Admin)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 					roles.add(adminRole);
 					break;
 					
-				case "student":
+				case "Student":
 					Role studentRole = roleRepository.findByName(ERole.Student)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 					roles.add(studentRole);
 					break;
 					
-				case "academicSupervisor":
+				case "AcademicSupervisor":
 					Role academicSupervisorRole = roleRepository.findByName(ERole.Academic_Supervisor)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 					roles.add(academicSupervisorRole);
@@ -125,4 +126,62 @@ public class AuthController {
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
+	
+	@PostMapping("/editUser")
+	public ResponseEntity<?> editUser(@Valid @RequestBody SignupRequestEdit signUpRequestEdit) {
+		
+		User user = userRepository.getById(signUpRequestEdit.getId());
+		
+		if (user == null) {
+			return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is not found."));
+		}
+		
+		user.setUsername(signUpRequestEdit.getUsername());
+		user.setEmail(signUpRequestEdit.getEmail());
+		user.setPassword(encoder.encode(signUpRequestEdit.getPassword()));
+
+		Set<String> strRoles = signUpRequestEdit.getRole();
+		Set<Role> roles = new HashSet<>(); 
+		
+		if (strRoles == null) {
+			Role userRole = roleRepository.findByName(ERole.User)
+					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+			roles.add(userRole);
+		} else {
+			strRoles.forEach(role -> {
+				switch (role) {
+				
+				case "Admin":
+					Role adminRole = roleRepository.findByName(ERole.Admin)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(adminRole);
+					break;
+					
+				case "Student":
+					Role studentRole = roleRepository.findByName(ERole.Student)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(studentRole);
+					break;
+					
+				case "AcademicSupervisor":
+					Role academicSupervisorRole = roleRepository.findByName(ERole.Academic_Supervisor)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(academicSupervisorRole);
+
+					break;
+					
+				default:
+					Role userRole = roleRepository.findByName(ERole.User)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(userRole);
+				}
+			});
+		}
+		
+		user.setRoles(roles);
+		userRepository.save(user);
+
+		return ResponseEntity.ok(new MessageResponse("User Updated successfully!"));
+	}
+	
 }

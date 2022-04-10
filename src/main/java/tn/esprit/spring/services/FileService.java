@@ -9,10 +9,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import tn.esprit.spring.models.FileData;
 
@@ -74,4 +76,22 @@ public class FileService {
 
         return fileData;
     }
+    
+    //ajouter pour upload file
+    @Value("${upload.path}")
+	 private String uploadPath;
+
+	 public void save(MultipartFile file) throws FileUploadException {
+	     try {
+	         Path root = Paths.get(uploadPath);
+	         Path resolve = root.resolve(file.getOriginalFilename());
+	         if (resolve.toFile().exists()) {        	 
+	             throw new FileUploadException("File already exists: " + file.getOriginalFilename());
+	         }
+	         Files.copy(file.getInputStream(), resolve);
+	     } catch (Exception e) {
+	         throw new FileUploadException("Could not store the file. Error: " + e.getMessage());
+	       }
+	 }
+    
 }

@@ -24,12 +24,12 @@ public class UserService {
 		return userRepository.save(user);
 	}
 	
-	public Optional<User> fetchUserById(int id) {
+	public Optional<User> fetchUserById(Long id) {
 		
 		return userRepository.findById(id);
 	}
 	
-	public String deleteUserById(int id) {
+	public String deleteUserById(Long id) {
 		
 		String result;
 		try {
