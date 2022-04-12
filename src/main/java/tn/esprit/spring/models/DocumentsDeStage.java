@@ -53,11 +53,9 @@ public class DocumentsDeStage {
 	@Size(max = 20)
 	public String encadrantAcademique;
 	
-	@NotBlank
 	@Temporal(TemporalType.DATE)
 	public Date dateDebutStage;
 	
-	@NotBlank
 	@Temporal (TemporalType.DATE)
 	public Date dateFinStage;
 

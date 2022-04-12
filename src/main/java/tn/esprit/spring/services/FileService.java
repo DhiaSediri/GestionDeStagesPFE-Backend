@@ -1,5 +1,6 @@
 package tn.esprit.spring.services;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -20,7 +22,7 @@ import tn.esprit.spring.models.FileData;
 
 @Service
 public class FileService {
-
+	
     @Value("src//")
     private String filesPath;
 
@@ -77,7 +79,7 @@ public class FileService {
         return fileData;
     }
     
-    //ajouter pour upload file
+    //upload file
     @Value("${upload.path}")
 	 private String uploadPath;
 
@@ -92,6 +94,23 @@ public class FileService {
 	     } catch (Exception e) {
 	         throw new FileUploadException("Could not store the file. Error: " + e.getMessage());
 	       }
+	 }
+	 
+	 public String deleteFile(String fileName) {
+		 try {
+	        	File file = new File(uploadPath+fileName);
+	            if (file.delete()) {
+	                System.out.println(fileName + " is deleted!");
+	                return fileName + " removed ...";
+	            } else {
+	                System.out.println("Sorry, unable to delete the file.");
+	                return "Sorry, unable to delete the file " + fileName;
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return "Error";
+	           
+	        }
 	 }
     
 }
