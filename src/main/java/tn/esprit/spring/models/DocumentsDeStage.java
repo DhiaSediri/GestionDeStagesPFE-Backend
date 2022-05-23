@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
@@ -18,52 +19,66 @@ public class DocumentsDeStage {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int id;
+	private int id;
 	
 	@NotBlank
 	@Size(max = 20)
-	public String nom_prenomEtudiant;
-	
-	@NotBlank
-	@Size(max = 20)
-	public String optionEtudiant;
-	
-	@NotBlank
-	@Size(max = 20)	
-	public String nomSociete;
-	
-	@NotBlank
-	@Size(max = 30)	
-	public String adresseSociete;
-	
-	@NotBlank
-	@Pattern(regexp = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$")
-	public String telephoneSociete;
+	private String nom_prenomEtudiant;
 	
 	@NotBlank
 	@Size(max = 50)
 	@Email
-	public String emailSociete;
+	private String emailEtudiant;
 	
 	@NotBlank
 	@Size(max = 20)
-	public String encadrantSociete;
+	private String optionEtudiant;
+	
+	@NotBlank
+	@Size(max = 20)	
+	private String nomSociete;
+	
+	@NotBlank
+	@Size(max = 30)	
+	private String adresseSociete;
+	
+	@NotBlank
+	@Pattern(regexp = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$")
+	private String telephoneSociete;
+	
+	@NotBlank
+	@Size(max = 50)
+	@Email
+	private String emailSociete;
 	
 	@NotBlank
 	@Size(max = 20)
-	public String encadrantAcademique;
+	private String encadrantSociete;
+	
+	@NotBlank
+	@Size(max = 20)
+	private String encadrantAcademique;
 	
 	@Temporal(TemporalType.DATE)
-	public Date dateDebutStage;
+	private Date dateDebutStage;
 	
 	@Temporal (TemporalType.DATE)
-	public Date dateFinStage;
+	private Date dateFinStage;
+	
+	private Etat etatDemande;
+	
+	@Temporal (TemporalType.DATE)
+	private Date dateDemande;
+	
+	@OneToOne(mappedBy = "demandeDeStage")
+    private User etudiant;
 
 	public DocumentsDeStage() {}
 
-	public DocumentsDeStage(String nom_prenomEtudiant, String optionEtudiant, String nomSociete, String adresseSociete, String telephoneSociete, 
-			String emailSociete, String encadrantSociete, String encadrantAcademique, Date dateDebutStage, Date dateFinStage) {
+	public DocumentsDeStage(String nom_prenomEtudiant, String emailEtudiant, String optionEtudiant, String nomSociete, String adresseSociete, String telephoneSociete, 
+			String emailSociete, String encadrantSociete, String encadrantAcademique, Date dateDebutStage, Date dateFinStage, Etat etatDemande, Date dateDemande) {
 		this.nom_prenomEtudiant = nom_prenomEtudiant;
+		this.emailEtudiant = emailEtudiant;
 		this.optionEtudiant = optionEtudiant;
 		this.nomSociete = nomSociete;
 		this.adresseSociete = adresseSociete;
@@ -73,6 +88,8 @@ public class DocumentsDeStage {
 		this.encadrantAcademique = encadrantAcademique;
 		this.dateDebutStage = dateDebutStage;
 		this.dateFinStage = dateFinStage;
+		this.etatDemande = etatDemande;
+		this.dateDemande = dateDemande;
 	}
 
 	public int getId() {
@@ -89,6 +106,14 @@ public class DocumentsDeStage {
 
 	public void setNom_prenomEtudiant(String nom_prenomEtudiant) {
 		this.nom_prenomEtudiant = nom_prenomEtudiant;
+	}
+
+	public String getEmailEtudiant() {
+		return emailEtudiant;
+	}
+
+	public void setEmailEtudiant(String emailEtudiant) {
+		this.emailEtudiant = emailEtudiant;
 	}
 
 	public String getOptionEtudiant() {
@@ -161,6 +186,30 @@ public class DocumentsDeStage {
 
 	public void setDateFinStage(Date dateFinStage) {
 		this.dateFinStage = dateFinStage;
+	}
+
+	public Etat getEtatDemande() {
+		return etatDemande;
+	}
+
+	public void setEtatDemande(Etat etatDemande) {
+		this.etatDemande = etatDemande;
+	}
+
+	public Date getDateDemande() {
+		return dateDemande;
+	}
+
+	public void setDateDemande(Date dateDemande) {
+		this.dateDemande = dateDemande;
+	}
+
+	public User getEtudiant() {
+		return etudiant;
+	}
+
+	public void setEtudiant(User etudiant) {
+		this.etudiant = etudiant;
 	}
 	
 }

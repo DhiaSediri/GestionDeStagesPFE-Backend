@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Template</title>
+</head>
+<body>
+
+<p>Bonjour,</p>
+<p>Nous voulons vous informer par le présent mail que votre Demande de Stage a été bien validée par le Responsable des Stages.</p>
+<p>vous trouverez ci-joint les détailles de votre Demande de Stage :</p>
+<p th:text="${'Votre nom et prenom : ' + nom_prenomEtudiant}"></p>
+<p th:text="${'Votre email : ' + emailEtudiant}"></p>
+<p th:text="${'Votre option : ' + optionEtudiant}"></p>
+<p th:text="${'Nom Societe : ' + nomSociete}"></p>
+<p th:text="${'Adresse Société    : ' + adresseSociete}"></p>
+<p th:text="${'Téléphone Société : ' + telephoneSociete}"></p>
+<p th:text="${'Email Société    : ' + emailSociete}"></p>
+<p th:text="${'Encadrant Société : ' + encadrantSociete}"></p>
+<p th:text="${'Encadrant Académique    : ' + encadrantAcademique}"></p>
+<p th:text="${'Date début stage : ' + dateDebutStage}"></p>
+<p th:text="${'Date fin stage    : ' + dateFinStage}"></p>
+<p th:text="${'Date demande stage : ' + dateDemande}"></p>
+<p>Cordialement.</p>
+
+</body>
+</html>

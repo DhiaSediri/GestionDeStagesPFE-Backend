@@ -1,12 +1,15 @@
 package tn.esprit.spring.models;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(	name = "users", 
@@ -37,6 +40,20 @@ public class User {
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
+    
+	@JsonIgnore
+    @ManyToOne
+    private User encadrant;
+	/*@OneToMany(mappedBy = "encadrant")
+	private List<User> listStudents;*/
+	
+	@OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
+    private List<Depot> listDepots;
+	
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "demandeDeStage_id", referencedColumnName = "id")
+    private DocumentsDeStage demandeDeStage;
 
 	public User() {
 	}
@@ -93,4 +110,37 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	public User getEncadrant() {
+		return encadrant;
+	}
+
+	public void setEncadrant(User encadrant) {
+		this.encadrant = encadrant;
+	}
+
+	/*public List<User> getListStudents() {
+		return listStudents;
+	}
+
+	public void setListStudents(List<User> listStudents) {
+		this.listStudents = listStudents;
+	}*/
+
+	public List<Depot> getListDepots() {
+		return listDepots;
+	}
+
+	public void setListDepots(List<Depot> listDepots) {
+		this.listDepots = listDepots;
+	}
+
+	public DocumentsDeStage getDemandeDeStage() {
+		return demandeDeStage;
+	}
+
+	public void setDemandeDeStage(DocumentsDeStage demandeDeStage) {
+		this.demandeDeStage = demandeDeStage;
+	}
+	
 }

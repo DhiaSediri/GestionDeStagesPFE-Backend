@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
+
 import tn.esprit.spring.models.User;
 import tn.esprit.spring.repositories.RoleRepository;
 import tn.esprit.spring.repositories.UserRepository;
@@ -64,6 +66,86 @@ public class UserController {
 	public String deleteUserById(@PathVariable Long id) {
 		
 		return userService.deleteUserById(id);
+	}
+	
+	/////////////////////////// Affectation /////////////////////////////////
+	
+	@GetMapping("/getAcademicsSupervisorList")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<User> fetchListAcademicsSupervisors(){
+			
+		List<User> listAcademicsSupervisors = new ArrayList<User>();	
+		listAcademicsSupervisors = userService.fetchListAcademicsSupervisors();
+		return listAcademicsSupervisors;
+	}
+	
+	@GetMapping("/getStudentList")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<User> fetchListStudents(){
+			
+		List<User> listStudents = new ArrayList<User>();	
+		listStudents = userService.fetchListStudents();
+		return listStudents;
+	}
+	
+	@GetMapping("/addAffectation/{encadrant_id}/{etudiant_id}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public void AddAffectation(@PathVariable Long encadrant_id, @PathVariable Long etudiant_id) {
+		
+		User academic_Supervisor = userService.fetchUserById(encadrant_id).get();
+		User student = userService.fetchUserById(etudiant_id).get();
+		
+		student.setEncadrant(academic_Supervisor);
+		
+		userService.saveUser(student);
+		
+		userService.saveUser(academic_Supervisor);			
+	}
+	
+	@GetMapping("/deleteAffectation/{encadrant_id}/{etudiant_id}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public void DeleteAffectation(@PathVariable Long encadrant_id, @PathVariable Long etudiant_id) {
+		
+		User academic_Supervisor = userService.fetchUserById(encadrant_id).get();
+		User student = userService.fetchUserById(etudiant_id).get();
+		
+		student.setEncadrant(null);
+		
+		userService.saveUser(student);
+		
+		userService.saveUser(academic_Supervisor);			
+	}
+	
+	@GetMapping("/getlistEtudiantsAffectesAEncadrant")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<User> fetchlistEtudiantsAffectesAEncadrant(){
+			
+		List<User> listEtudiantsAffectesAEncadrant = new ArrayList<User>();	
+		listEtudiantsAffectesAEncadrant = userService.fetchListEtudiantsAffectesAEncadrant();
+		return listEtudiantsAffectesAEncadrant;
+	}
+	
+	/////////////////////////// Statistiques ////////////////////////////////
+	
+	@GetMapping("/getNumberAdmins")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public int getNumberAdmins(){
+			
+		return userService.getNumberAdmins();
+	}
+	
+	@GetMapping("/getNumberStudents")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public int getNumberStudents(){
+			
+		return userService.getNumberStudents();
+	}
+	
+	@GetMapping("/getNumberAcademicsSupervisors")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public int getNumberAcademicsSupervisors(){
+			
+		return userService.getNumberAcademicsSupervisors();
 	}
 	
 }

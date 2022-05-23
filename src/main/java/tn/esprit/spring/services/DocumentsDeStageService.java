@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.models.DocumentsDeStage;
+import tn.esprit.spring.models.User;
 import tn.esprit.spring.repositories.DocumentsDeStageRepository;
 
 @Service
@@ -39,7 +40,12 @@ public class DocumentsDeStageService {
 		} catch (Exception e) {
 			result = "Documents de stage with id " + id + " is not deleted";
 		}
-		return result;
-		
+		return result;	
 	}
+	
+	public List<DocumentsDeStage> fetchListDocumentsDeStageDEPOSEE(){
+		
+		return documentsDeStageRepository.getListDocumentsDeStageDEPOSEE();
+	}
+	
 }

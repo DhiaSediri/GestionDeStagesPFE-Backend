@@ -23,143 +23,152 @@ import java.util.Date;
 @Controller
 public class PDFCreator {
 
-    @Autowired
-    SpringTemplateEngine templateEngine;
+	@Autowired
+	SpringTemplateEngine templateEngine;
 
-    @RequestMapping("/getConventionDeStage")
-    public @ResponseBody DocumentsDeStage savePDF(@RequestBody DocumentsDeStage documentsDeStage) throws IOException, DocumentException {
-        Context context = new Context();
+	//Creer Dossier Documents De Stage
+	@RequestMapping("/creerDossierDocumentsDeStage")
+	public @ResponseBody DocumentsDeStage creerDossierDocumentsDeStage(@RequestBody DocumentsDeStage documentsDeStage) {
 
-        context.setVariable("nom_prenomEtudiant",documentsDeStage.getNom_prenomEtudiant());
-        context.setVariable("optionEtudiant",documentsDeStage.getOptionEtudiant());
-        context.setVariable("nomSociete",documentsDeStage.getNomSociete());
-        context.setVariable("adresseSociete",documentsDeStage.getAdresseSociete());
-        context.setVariable("telephoneSociete",documentsDeStage.getTelephoneSociete());
-        context.setVariable("emailSociete",documentsDeStage.getEmailSociete());
-        context.setVariable("encadrantSociete",documentsDeStage.getEncadrantSociete());
-        context.setVariable("encadrantAcademique",documentsDeStage.getEncadrantAcademique());
-        
-        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
-        
-        context.setVariable("dateDebutStage",s.format(documentsDeStage.getDateDebutStage()));
-        context.setVariable("dateFinStage",s.format(documentsDeStage.getDateFinStage())); 
-        
-        Date dateActuelle = new Date();
-        context.setVariable("dateActuelle", s.format(dateActuelle));
+		File dossier = new File("C:\\Users\\DELL\\Documents\\workspace-spring-tool-suite-4-4.13.0.RELEASE\\Authentication\\src\\DocumentDeStage-" + documentsDeStage.getEmailEtudiant());
+		boolean res = dossier.mkdir();
 
-        String htmlContentToRender = templateEngine.process("pdfConventionDeStage-template", context);
-        String xHtml = xhtmlConvert(htmlContentToRender);
+		if (res) {
+			System.out.println("Le dossier a été créé.");
+		} else {
+			System.out.println("Le dossier existe déja.");
+		}
+		return documentsDeStage;
+	}
 
-        ITextRenderer renderer = new ITextRenderer();
+	@RequestMapping("/getConventionDeStage")
+	public @ResponseBody DocumentsDeStage savePDFConventionDeStage(@RequestBody DocumentsDeStage documentsDeStage)
+			throws IOException, DocumentException {
+		Context context = new Context();
 
-        String baseUrl = FileSystems
-                .getDefault()
-                .getPath("src", "main", "resources","templates")
-                .toUri()
-                .toURL()
-                .toString();
-        renderer.setDocumentFromString(xHtml, baseUrl);
-        renderer.layout();
+		context.setVariable("nom_prenomEtudiant", documentsDeStage.getNom_prenomEtudiant());
+		context.setVariable("optionEtudiant", documentsDeStage.getOptionEtudiant());
+		context.setVariable("nomSociete", documentsDeStage.getNomSociete());
+		context.setVariable("adresseSociete", documentsDeStage.getAdresseSociete());
+		context.setVariable("telephoneSociete", documentsDeStage.getTelephoneSociete());
+		context.setVariable("emailSociete", documentsDeStage.getEmailSociete());
+		context.setVariable("encadrantSociete", documentsDeStage.getEncadrantSociete());
+		context.setVariable("encadrantAcademique", documentsDeStage.getEncadrantAcademique());
 
-        OutputStream outputStream = new FileOutputStream("src//ConventionDeStage-" + documentsDeStage.getNom_prenomEtudiant() + ".pdf");
-        renderer.createPDF(outputStream);
-        outputStream.close();
+		SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
 
-        return documentsDeStage;
-    }
-    
-    @RequestMapping("/getDemandeDeStage")
-    public @ResponseBody DocumentsDeStage savePDFDemandeDeStage(@RequestBody DocumentsDeStage documentsDeStage) throws IOException, DocumentException {
-        Context context = new Context();
+		context.setVariable("dateDebutStage", s.format(documentsDeStage.getDateDebutStage()));
+		context.setVariable("dateFinStage", s.format(documentsDeStage.getDateFinStage()));
 
-        context.setVariable("nom_prenomEtudiant",documentsDeStage.getNom_prenomEtudiant());
-        context.setVariable("optionEtudiant",documentsDeStage.getOptionEtudiant());
-        context.setVariable("nomSociete",documentsDeStage.getNomSociete());
-        context.setVariable("adresseSociete",documentsDeStage.getAdresseSociete());
-        context.setVariable("telephoneSociete",documentsDeStage.getTelephoneSociete());
-        context.setVariable("emailSociete",documentsDeStage.getEmailSociete());
-        context.setVariable("encadrantSociete",documentsDeStage.getEncadrantSociete());
-        context.setVariable("encadrantAcademique",documentsDeStage.getEncadrantAcademique());
-        
-        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
-        
-        context.setVariable("dateDebutStage",s.format(documentsDeStage.getDateDebutStage()));
-        context.setVariable("dateFinStage",s.format(documentsDeStage.getDateFinStage())); 
-        
-        Date dateActuelle = new Date();
-        context.setVariable("dateActuelle", s.format(dateActuelle));
+		Date dateActuelle = new Date();
+		context.setVariable("dateActuelle", s.format(dateActuelle));
 
-        String htmlContentToRender = templateEngine.process("pdfDemandeDeStage-template", context);
-        String xHtml = xhtmlConvert(htmlContentToRender);
+		String htmlContentToRender = templateEngine.process("pdfConventionDeStage-template", context);
+		String xHtml = xhtmlConvert(htmlContentToRender);
 
-        ITextRenderer renderer = new ITextRenderer();
+		ITextRenderer renderer = new ITextRenderer();
 
-        String baseUrl = FileSystems
-                .getDefault()
-                .getPath("src", "main", "resources","templates")
-                .toUri()
-                .toURL()
-                .toString();
-        renderer.setDocumentFromString(xHtml, baseUrl);
-        renderer.layout();
+		String baseUrl = FileSystems.getDefault().getPath("src", "main", "resources", "templates").toUri().toURL()
+				.toString();
+		renderer.setDocumentFromString(xHtml, baseUrl);
+		renderer.layout();
 
-        OutputStream outputStream = new FileOutputStream("src//DemandeDeStage-" + documentsDeStage.getNom_prenomEtudiant() + ".pdf");
-        renderer.createPDF(outputStream);
-        outputStream.close();
+		OutputStream outputStream = new FileOutputStream(
+				"src//DocumentDeStage-" + documentsDeStage.getEmailEtudiant() + "//ConventionDeStage-" + documentsDeStage.getEmailEtudiant() + ".pdf");
+		renderer.createPDF(outputStream);
+		outputStream.close();
 
-        return documentsDeStage;
-    }
-    
-    @RequestMapping("/getLettreAffectationStage")
-    public @ResponseBody DocumentsDeStage savePDFLettreAffectationStage(@RequestBody DocumentsDeStage documentsDeStage) throws IOException, DocumentException {
-        Context context = new Context();
+		return documentsDeStage;
+	}
 
-        context.setVariable("nom_prenomEtudiant",documentsDeStage.getNom_prenomEtudiant());
-        context.setVariable("optionEtudiant",documentsDeStage.getOptionEtudiant());
-        context.setVariable("nomSociete",documentsDeStage.getNomSociete());
-        context.setVariable("adresseSociete",documentsDeStage.getAdresseSociete());
-        context.setVariable("telephoneSociete",documentsDeStage.getTelephoneSociete());
-        context.setVariable("emailSociete",documentsDeStage.getEmailSociete());
-        context.setVariable("encadrantSociete",documentsDeStage.getEncadrantSociete());
-        context.setVariable("encadrantAcademique",documentsDeStage.getEncadrantAcademique());
-        
-        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
-        
-        context.setVariable("dateDebutStage",s.format(documentsDeStage.getDateDebutStage()));
-        context.setVariable("dateFinStage",s.format(documentsDeStage.getDateFinStage())); 
-        
-        Date dateActuelle = new Date();
-        context.setVariable("dateActuelle", s.format(dateActuelle));
+	@RequestMapping("/getDemandeDeStage")
+	public @ResponseBody DocumentsDeStage savePDFDemandeDeStage(@RequestBody DocumentsDeStage documentsDeStage)
+			throws IOException, DocumentException {
+		Context context = new Context();
 
-        String htmlContentToRender = templateEngine.process("pdfLettreAffectationStage-template", context);
-        String xHtml = xhtmlConvert(htmlContentToRender);
+		context.setVariable("nom_prenomEtudiant", documentsDeStage.getNom_prenomEtudiant());
+		context.setVariable("optionEtudiant", documentsDeStage.getOptionEtudiant());
+		context.setVariable("nomSociete", documentsDeStage.getNomSociete());
+		context.setVariable("adresseSociete", documentsDeStage.getAdresseSociete());
+		context.setVariable("telephoneSociete", documentsDeStage.getTelephoneSociete());
+		context.setVariable("emailSociete", documentsDeStage.getEmailSociete());
+		context.setVariable("encadrantSociete", documentsDeStage.getEncadrantSociete());
+		context.setVariable("encadrantAcademique", documentsDeStage.getEncadrantAcademique());
 
-        ITextRenderer renderer = new ITextRenderer();
+		SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
 
-        String baseUrl = FileSystems
-                .getDefault()
-                .getPath("src", "main", "resources","templates")
-                .toUri()
-                .toURL()
-                .toString();
-        renderer.setDocumentFromString(xHtml, baseUrl);
-        renderer.layout();
+		context.setVariable("dateDebutStage", s.format(documentsDeStage.getDateDebutStage()));
+		context.setVariable("dateFinStage", s.format(documentsDeStage.getDateFinStage()));
 
-        OutputStream outputStream = new FileOutputStream("src//LettreAffectationStage-" + documentsDeStage.getNom_prenomEtudiant() + ".pdf");
-        renderer.createPDF(outputStream);
-        outputStream.close();
+		Date dateActuelle = new Date();
+		context.setVariable("dateActuelle", s.format(dateActuelle));
 
-        return documentsDeStage;
-    }
+		String htmlContentToRender = templateEngine.process("pdfDemandeDeStage-template", context);
+		String xHtml = xhtmlConvert(htmlContentToRender);
 
-    private String xhtmlConvert(String html) throws UnsupportedEncodingException {
-        Tidy tidy = new Tidy();
-        tidy.setInputEncoding("UTF-8");
-        tidy.setOutputEncoding("UTF-8");
-        tidy.setXHTML(true);
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(html.getBytes("UTF-8"));
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        tidy.parseDOM(inputStream, outputStream);
-        return outputStream.toString("UTF-8");
-    }
+		ITextRenderer renderer = new ITextRenderer();
+
+		String baseUrl = FileSystems.getDefault().getPath("src", "main", "resources", "templates").toUri().toURL()
+				.toString();
+		renderer.setDocumentFromString(xHtml, baseUrl);
+		renderer.layout();
+
+		OutputStream outputStream = new FileOutputStream(
+				"src//DocumentDeStage-" + documentsDeStage.getEmailEtudiant() + "//DemandeDeStage-" + documentsDeStage.getEmailEtudiant() + ".pdf");
+		renderer.createPDF(outputStream);
+		outputStream.close();
+
+		return documentsDeStage;
+	}
+
+	@RequestMapping("/getLettreAffectationStage")
+	public @ResponseBody DocumentsDeStage savePDFLettreAffectationStage(@RequestBody DocumentsDeStage documentsDeStage)
+			throws IOException, DocumentException {
+		Context context = new Context();
+
+		context.setVariable("nom_prenomEtudiant", documentsDeStage.getNom_prenomEtudiant());
+		context.setVariable("optionEtudiant", documentsDeStage.getOptionEtudiant());
+		context.setVariable("nomSociete", documentsDeStage.getNomSociete());
+		context.setVariable("adresseSociete", documentsDeStage.getAdresseSociete());
+		context.setVariable("telephoneSociete", documentsDeStage.getTelephoneSociete());
+		context.setVariable("emailSociete", documentsDeStage.getEmailSociete());
+		context.setVariable("encadrantSociete", documentsDeStage.getEncadrantSociete());
+		context.setVariable("encadrantAcademique", documentsDeStage.getEncadrantAcademique());
+
+		SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+
+		context.setVariable("dateDebutStage", s.format(documentsDeStage.getDateDebutStage()));
+		context.setVariable("dateFinStage", s.format(documentsDeStage.getDateFinStage()));
+
+		Date dateActuelle = new Date();
+		context.setVariable("dateActuelle", s.format(dateActuelle));
+
+		String htmlContentToRender = templateEngine.process("pdfLettreAffectationStage-template", context);
+		String xHtml = xhtmlConvert(htmlContentToRender);
+
+		ITextRenderer renderer = new ITextRenderer();
+
+		String baseUrl = FileSystems.getDefault().getPath("src", "main", "resources", "templates").toUri().toURL()
+				.toString();
+		renderer.setDocumentFromString(xHtml, baseUrl);
+		renderer.layout();
+
+		OutputStream outputStream = new FileOutputStream(
+				"src//DocumentDeStage-" + documentsDeStage.getEmailEtudiant() + "//LettreAffectationStage-" + documentsDeStage.getEmailEtudiant() + ".pdf");
+		renderer.createPDF(outputStream);
+		outputStream.close();
+
+		return documentsDeStage;
+	}
+
+	private String xhtmlConvert(String html) throws UnsupportedEncodingException {
+		Tidy tidy = new Tidy();
+		tidy.setInputEncoding("UTF-8");
+		tidy.setOutputEncoding("UTF-8");
+		tidy.setXHTML(true);
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(html.getBytes("UTF-8"));
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		tidy.parseDOM(inputStream, outputStream);
+		return outputStream.toString("UTF-8");
+	}
 }

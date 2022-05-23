@@ -1,7 +1,9 @@
 package tn.esprit.spring;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.MultipartConfigElement;
@@ -21,6 +23,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import tn.esprit.spring.controllers.UserController;
@@ -64,11 +67,37 @@ public class AuthenticationApplication implements ApplicationRunner {
 		/*Role academic_SupervisorRole = roleRepository.findByName(ERole.Academic_Supervisor).get();
 		Set<Role> roles= new HashSet<Role>();
 		roles.add(academic_SupervisorRole);
-		User academic_Supervisor = new User("amin", "amin.sediri@esprit.tn", encoder.encode("encadrant"), roles); 	
+		User academic_Supervisor = new User("test111111111111", "mohamed111.sediri@esprit.tn", encoder.encode("testtesttest"), roles); 	
 		userRepository.save(academic_Supervisor);*/
+		
+		//test affectation
+		/*Role studentRole = roleRepository.findByName(ERole.Student).get();
+		Set<Role> roles= new HashSet<Role>();
+		roles.add(studentRole);
+		User student = new User("studentttttttt", "studenttttttttttt.sediri@esprit.tn", encoder.encode("studenttttttt"), roles); 	
+		
+		
+		Role academic_SupervisorRole = roleRepository.findByName(ERole.Academic_Supervisor).get();
+		Set<Role> roless= new HashSet<Role>();
+		roless.add(academic_SupervisorRole);
+		User academic_Supervisor = new User("encadranttttt", "encadrantttttttttttt.sediri@esprit.tn", encoder.encode("encadrantttttt"), roless); 	
+		
+		
+		userRepository.save(academic_Supervisor);
+		
+		student.setEncadrant(academic_Supervisor);
+		
+		userRepository.save(student);
+		
+		//zeydiiiiiiin
+		List<User> listStudents = new ArrayList<User>();
+		listStudents.add(student);
+		academic_Supervisor.setListStudents(listStudents);
+		
+		userRepository.save(academic_Supervisor);*/	
 	}
 	
-	//ajouter pour generer PDF
+	//génération PDF
 	@Bean
 	@SuppressWarnings("unchecked")
 	public FilterRegistrationBean simpleCorsFilter() {
