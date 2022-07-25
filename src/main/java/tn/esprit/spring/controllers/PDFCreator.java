@@ -26,11 +26,13 @@ public class PDFCreator {
 	@Autowired
 	SpringTemplateEngine templateEngine;
 
-	//Creer Dossier Documents De Stage
+	// Creer Dossier Documents De Stage
 	@RequestMapping("/creerDossierDocumentsDeStage")
 	public @ResponseBody DocumentsDeStage creerDossierDocumentsDeStage(@RequestBody DocumentsDeStage documentsDeStage) {
 
-		File dossier = new File("C:\\Users\\DELL\\Documents\\workspace-spring-tool-suite-4-4.13.0.RELEASE\\Authentication\\src\\DocumentDeStage-" + documentsDeStage.getEmailEtudiant());
+		File dossier = new File(
+				"C:\\Users\\DELL\\Documents\\workspace-spring-tool-suite-4-4.13.0.RELEASE\\Authentication\\src\\DocumentDeStage-"
+						+ documentsDeStage.getEmailEtudiant());
 		boolean res = dossier.mkdir();
 
 		if (res) {
@@ -73,8 +75,8 @@ public class PDFCreator {
 		renderer.setDocumentFromString(xHtml, baseUrl);
 		renderer.layout();
 
-		OutputStream outputStream = new FileOutputStream(
-				"src//DocumentDeStage-" + documentsDeStage.getEmailEtudiant() + "//ConventionDeStage-" + documentsDeStage.getEmailEtudiant() + ".pdf");
+		OutputStream outputStream = new FileOutputStream("src//DocumentDeStage-" + documentsDeStage.getEmailEtudiant()
+				+ "//ConventionDeStage-" + documentsDeStage.getEmailEtudiant() + ".pdf");
 		renderer.createPDF(outputStream);
 		outputStream.close();
 
@@ -113,8 +115,8 @@ public class PDFCreator {
 		renderer.setDocumentFromString(xHtml, baseUrl);
 		renderer.layout();
 
-		OutputStream outputStream = new FileOutputStream(
-				"src//DocumentDeStage-" + documentsDeStage.getEmailEtudiant() + "//DemandeDeStage-" + documentsDeStage.getEmailEtudiant() + ".pdf");
+		OutputStream outputStream = new FileOutputStream("src//DocumentDeStage-" + documentsDeStage.getEmailEtudiant()
+				+ "//DemandeDeStage-" + documentsDeStage.getEmailEtudiant() + ".pdf");
 		renderer.createPDF(outputStream);
 		outputStream.close();
 
@@ -153,8 +155,8 @@ public class PDFCreator {
 		renderer.setDocumentFromString(xHtml, baseUrl);
 		renderer.layout();
 
-		OutputStream outputStream = new FileOutputStream(
-				"src//DocumentDeStage-" + documentsDeStage.getEmailEtudiant() + "//LettreAffectationStage-" + documentsDeStage.getEmailEtudiant() + ".pdf");
+		OutputStream outputStream = new FileOutputStream("src//DocumentDeStage-" + documentsDeStage.getEmailEtudiant()
+				+ "//LettreAffectationStage-" + documentsDeStage.getEmailEtudiant() + ".pdf");
 		renderer.createPDF(outputStream);
 		outputStream.close();
 

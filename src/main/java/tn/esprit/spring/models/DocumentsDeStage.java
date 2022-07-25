@@ -22,24 +22,24 @@ public class DocumentsDeStage {
 	private int id;
 	
 	@NotBlank
-	@Size(max = 20)
+	@Size(max = 50)
 	private String nom_prenomEtudiant;
 	
 	@NotBlank
-	@Size(max = 50)
+	//@Size(max = 50)
 	@Email
 	private String emailEtudiant;
 	
 	@NotBlank
-	@Size(max = 20)
+	@Size(max = 100)
 	private String optionEtudiant;
 	
 	@NotBlank
-	@Size(max = 20)	
+	@Size(max = 100)	
 	private String nomSociete;
 	
 	@NotBlank
-	@Size(max = 30)	
+	@Size(max = 100)	
 	private String adresseSociete;
 	
 	@NotBlank
@@ -47,16 +47,16 @@ public class DocumentsDeStage {
 	private String telephoneSociete;
 	
 	@NotBlank
-	@Size(max = 50)
+	//@Size(max = 50)
 	@Email
 	private String emailSociete;
 	
 	@NotBlank
-	@Size(max = 20)
+	@Size(max = 50)
 	private String encadrantSociete;
 	
 	@NotBlank
-	@Size(max = 20)
+	@Size(max = 50)
 	private String encadrantAcademique;
 	
 	@Temporal(TemporalType.DATE)

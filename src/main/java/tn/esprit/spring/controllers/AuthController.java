@@ -106,7 +106,7 @@ public class AuthController {
 					roles.add(studentRole);
 					break;
 					
-				case "AcademicSupervisor":
+				case "Academic_Supervisor":
 					Role academicSupervisorRole = roleRepository.findByName(ERole.Academic_Supervisor)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 					roles.add(academicSupervisorRole);
@@ -179,6 +179,24 @@ public class AuthController {
 		}
 		
 		user.setRoles(roles);
+		userRepository.save(user);
+
+		return ResponseEntity.ok(new MessageResponse("User Updated successfully!"));
+	}
+	
+	@PostMapping("/editUserByHimself")
+	public ResponseEntity<?> editUserByHimself(@Valid @RequestBody SignupRequestEdit signUpRequestEdit) {
+		
+		User user = userRepository.getById(signUpRequestEdit.getId());
+		
+		if (user == null) {
+			return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is not found."));
+		}
+		
+		user.setUsername(signUpRequestEdit.getUsername());
+		user.setEmail(signUpRequestEdit.getEmail());
+		user.setPassword(encoder.encode(signUpRequestEdit.getPassword()));
+		
 		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User Updated successfully!"));

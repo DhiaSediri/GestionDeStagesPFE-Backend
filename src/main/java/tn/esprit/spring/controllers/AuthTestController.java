@@ -34,9 +34,9 @@ public class AuthTestController {
 		return "Student Content";
 	}
 	
-	@GetMapping("/academicSupervisor")
+	@GetMapping("/Academic_Supervisor")
 	@PreAuthorize("hasRole('Academic_Supervisor')")
-	public String 	academicSupervisorAccess() {
+	public String academicSupervisorAccess() {
 		return "Academic Supervisor Content";
 	}
 

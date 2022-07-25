@@ -23,11 +23,11 @@ public class User {
 	private Long id;
 
 	@NotBlank
-	@Size(max = 20)
+	@Size(max = 50)
 	private String username;
 
 	@NotBlank
-	@Size(max = 50)
+	//@Size(max = 50)
 	@Email
 	private String email;
 
@@ -47,6 +47,7 @@ public class User {
 	/*@OneToMany(mappedBy = "encadrant")
 	private List<User> listStudents;*/
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
     private List<Depot> listDepots;
 	

@@ -3,7 +3,6 @@ package tn.esprit.spring.controllers;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,6 +31,23 @@ public class DocumentsDeStageController {
 	@Autowired
 	UserService userService;
 	
+	@GetMapping("/getDocumentsDeStageListParRecherche/{mots_cles}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<DocumentsDeStage> fetchgetDocumentsDeStageListParRecherche(@PathVariable String mots_cles) {
+		
+		List<DocumentsDeStage> documentsDeStageList = new ArrayList<DocumentsDeStage>();
+		documentsDeStageList = documentsDeStageService.fetchDocumentsDeStageList();
+		
+		List<DocumentsDeStage> documentsDeStageListParRecherche = new ArrayList<DocumentsDeStage>();
+		
+		for (DocumentsDeStage documentsDeStage : documentsDeStageList) {
+			if(documentsDeStage.getNom_prenomEtudiant().contains(mots_cles) || documentsDeStage.getEmailEtudiant().contains(mots_cles) || documentsDeStage.getEncadrantAcademique().contains(mots_cles)) {	
+				documentsDeStageListParRecherche.add(documentsDeStage);
+			}	
+		}
+		return documentsDeStageListParRecherche;
+	}
+	
 	@GetMapping("/getDocumentsDeStageList")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public List<DocumentsDeStage> fetchDocumentsDeStageList(){
@@ -44,15 +60,6 @@ public class DocumentsDeStageController {
 	@PostMapping("/addDocumentsDeStage")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public DocumentsDeStage saveDocumentsDeStage(@RequestBody DocumentsDeStage documentsDeStage){
-		/*
-		documentsDeStage.setEtatDemande(Etat.DEPOSEE);
-		documentsDeStage.setDateDemande(new Date());
-		System.out.println(documentsDeStage.getEmailEtudiant());
-		Optional<User> etudiant = userService.fetchUserByEmail(documentsDeStage.getEmailEtudiant());
-		System.out.println(etudiant.get().getId());
-		documentsDeStage.setEtudiant(etudiant.get());
-		return documentsDeStageService.saveDocumentsDeStage(documentsDeStage);
-		*/
 		
 		documentsDeStage.setEtatDemande(Etat.DEPOSEE);
 		documentsDeStage.setDateDemande(new Date());
@@ -81,6 +88,34 @@ public class DocumentsDeStageController {
 		return documentsDeStageService.deleteDocumentsDeStageById(id);
 	}
 	
+	///////////////////////////////////////////// Traitement Demande de stage /////////////////////////////////////////////
+	
+	@GetMapping("/getDocumentsDeStageDEPOSEEListParRecherche/{mots_cles}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<DocumentsDeStage> fetchDocumentsDeStageDEPOSEEListParRecherche(@PathVariable String mots_cles) {
+		
+		List<DocumentsDeStage> listDocumentsDeStageDEPOSEE = new ArrayList<DocumentsDeStage>();
+		listDocumentsDeStageDEPOSEE = documentsDeStageService.fetchListDocumentsDeStageDEPOSEE();
+		
+		List<DocumentsDeStage> listDocumentsDeStageDEPOSEEParRecherche = new ArrayList<DocumentsDeStage>();
+		
+		for (DocumentsDeStage documentsDeStage : listDocumentsDeStageDEPOSEE) {
+			if(documentsDeStage.getNom_prenomEtudiant().contains(mots_cles) || documentsDeStage.getEmailEtudiant().contains(mots_cles) || documentsDeStage.getEncadrantAcademique().contains(mots_cles)) {	
+				listDocumentsDeStageDEPOSEEParRecherche.add(documentsDeStage);
+			}	
+		}
+		return listDocumentsDeStageDEPOSEEParRecherche;
+	}
+	
+	@GetMapping("/getListDocumentsDeStageDEPOSEE")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<DocumentsDeStage> fetchListDocumentsDeStageDEPOSEE(){
+			
+		List<DocumentsDeStage> listDocumentsDeStageDEPOSEE = new ArrayList<DocumentsDeStage>();	
+		listDocumentsDeStageDEPOSEE = documentsDeStageService.fetchListDocumentsDeStageDEPOSEE();
+		return listDocumentsDeStageDEPOSEE;
+	}
+	
 	@PostMapping("/accepterDemande")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public DocumentsDeStage accepterDemande(@RequestBody DocumentsDeStage documentsDeStage){
@@ -97,15 +132,6 @@ public class DocumentsDeStageController {
 		DocumentsDeStage demande = documentsDeStageService.fetchDocumentsDeStageById(documentsDeStage.getId()).get();
 		demande.setEtatDemande(Etat.REFUSEE);
 		return documentsDeStageService.saveDocumentsDeStage(demande);
-	}
-	
-	@GetMapping("/getListDocumentsDeStageDEPOSEE")
-	@CrossOrigin(origins = "http://localhost:4200")
-	public List<DocumentsDeStage> fetchListDocumentsDeStageDEPOSEE(){
-			
-		List<DocumentsDeStage> listDocumentsDeStageDEPOSEE = new ArrayList<DocumentsDeStage>();	
-		listDocumentsDeStageDEPOSEE = documentsDeStageService.fetchListDocumentsDeStageDEPOSEE();
-		return listDocumentsDeStageDEPOSEE;
 	}
 
 }

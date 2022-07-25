@@ -9,11 +9,11 @@
 <body>
 
 <p>Bonjour,</p>
-<p>Nous voulons vous informer par le présent mail que votre Demande de Stage a été bien validée par le Responsable des Stages.</p>
+<p>Nous voulons vous informer par le présent mail que votre Demande de Stage a été bien validée le <b><span th:text="${dateTraitement}"></span></b> par le Responsable des Stages.</p>
 <p>vous trouverez ci-joint les détailles de votre Demande de Stage :</p>
-<p th:text="${'Votre nom et prenom : ' + nom_prenomEtudiant}"></p>
-<p th:text="${'Votre email : ' + emailEtudiant}"></p>
-<p th:text="${'Votre option : ' + optionEtudiant}"></p>
+<p th:text="${'Nom et prenom Etudiant : ' + nom_prenomEtudiant}"></p>
+<p th:text="${'Email Etudiant : ' + emailEtudiant}"></p>
+<p th:text="${'Option : ' + optionEtudiant}"></p>
 <p th:text="${'Nom Societe : ' + nomSociete}"></p>
 <p th:text="${'Adresse Société    : ' + adresseSociete}"></p>
 <p th:text="${'Téléphone Société : ' + telephoneSociete}"></p>

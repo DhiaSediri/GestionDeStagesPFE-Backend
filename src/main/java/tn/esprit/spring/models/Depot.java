@@ -9,10 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 @Entity
 public class Depot {
@@ -21,17 +17,17 @@ public class Depot {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@NotBlank
+	//@NotBlank
 	private TypeDepot typeDepot;
 	
-	@NotBlank
+	//@NotBlank
 	private Etat etatDepot;
 	
 	@Temporal (TemporalType.DATE)
 	public Date dateDepot;
 	
-	 @ManyToOne
-	 private User etudiant;
+	@ManyToOne
+	private User etudiant;
 
 	public Depot() {}
 

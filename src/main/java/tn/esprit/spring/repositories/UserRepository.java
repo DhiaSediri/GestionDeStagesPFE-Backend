@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	Boolean existsByEmail(String email);
 	
-	//Récupérer l'utilisateur par son email (pour affecter la demande de stage à l'utilisateur)
+	//Récupérer l'utilisateur (l'étudiant) par son email pour lui affecter la demande de stage
 	@Query(value = "SELECT * FROM users u WHERE email = :email", nativeQuery = true)
 	Optional<User> findByEmail(@Param("email") String email);
 	
@@ -44,13 +44,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "SELECT COUNT(*) FROM users u, roles r, user_roles ur  WHERE u.id = ur.user_id AND r.id = ur.role_id AND r.name = 'Academic_Supervisor'", nativeQuery = true)
 	public int getNumberAcademicsSupervisors();
 
-	@Query(value = "SELECT * FROM users u, roles r, user_roles ur  WHERE u.id = ur.user_id AND r.id = ur.role_id AND r.name = 'Student' AND u.encadrant_id IS NOT NULL", nativeQuery = true)
-	List<User> getListEtudiantsAffectesAEncadrant();
+	@Query(value = "SELECT * FROM users u WHERE u.encadrant_id = encadrant_id", nativeQuery = true)
+	List<User> getListEtudiantsAffectesAEncadrant(@Param("encadrant_id") Long encadrant_id);
 	
-	@Query(value = "SELECT * FROM users u, roles r, user_roles ur  WHERE u.id = ur.user_id AND r.id = ur.role_id AND r.name = 'Student' AND u.encadrant_id = id", nativeQuery = true)
-	List<User> getListEtudiantsPourEncadrant(@Param("id") Long id);
-	
-	@Query(value = "SELECT encadrant_id FROM users WHERE username = 'usernameEtudiant'", nativeQuery = true)
-	List<User> getIdEncadrant(@Param("usernameEtudiant") String usernameEtudiant);
+	//Récupérer l'utilisateur (étudiant et encadrant) par username pour envoyer un mail contenant les détailles de l'affectaion
+	@Query(value = "SELECT * FROM users u WHERE username = :username", nativeQuery = true)
+	Optional<User> findUserByUsername(@Param("username") String username);
 	
 }
