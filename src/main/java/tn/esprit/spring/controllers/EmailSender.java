@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -201,7 +202,7 @@ public class EmailSender {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("typeDepot", depot.getTypeDepot());
 		model.put("etatDepot", depot.getEtatDepot());
-		model.put("dateDepot", depot.getDateDepot());
+		model.put("dateDepot", depot.getToDisplayDateDepot());
 		model.put("usernameEtudiant", depot.getEtudiant().getUsername());
 		model.put("emailEtudiant", depot.getEtudiant().getEmail());
 
@@ -225,7 +226,7 @@ public class EmailSender {
 		return depot;
 	}
 	
-	@RequestMapping("/getdetailsDepotConventionAccepteeToStudent/{depot_id}")
+	@GetMapping("/getdetailsDepotConventionAccepteeToStudent/{depot_id}")
 	public @ResponseBody Depot sendMailDepotConventionAccepteeToStudent(@PathVariable int depot_id) throws Exception {
 
 		MimeMessage message = sender.createMimeMessage();
@@ -237,7 +238,7 @@ public class EmailSender {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("typeDepot", depotConvention.getTypeDepot());
 		model.put("etatDepot", depotConvention.getEtatDepot());
-		model.put("dateDepot", depotConvention.getDateDepot());
+		model.put("dateDepot", depotConvention.getToDisplayDateDepot());
 		
 		Date dateTraitement = new Date();
 		model.put("dateTraitement", dateTraitement);
@@ -258,7 +259,7 @@ public class EmailSender {
 		return depotConvention;
 	}
 	
-	@RequestMapping("/getdetailsDepotConventionRefuseeToStudent/{depot_id}")
+	@GetMapping("/getdetailsDepotConventionRefuseeToStudent/{depot_id}")
 	public @ResponseBody Depot sendMailDepotConventionRefuseeToStudent(@PathVariable int depot_id) throws Exception {
 
 		MimeMessage message = sender.createMimeMessage();
@@ -270,7 +271,7 @@ public class EmailSender {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("typeDepot", depotConvention.getTypeDepot());
 		model.put("etatDepot", depotConvention.getEtatDepot());
-		model.put("dateDepot", depotConvention.getDateDepot());
+		model.put("dateDepot", depotConvention.getToDisplayDateDepot());
 		
 		Date dateTraitement = new Date();
 		model.put("dateTraitement", dateTraitement);
@@ -301,7 +302,7 @@ public class EmailSender {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("typeDepot", depot.getTypeDepot());
 		model.put("etatDepot", depot.getEtatDepot());
-		model.put("dateDepot", depot.getDateDepot());
+		model.put("dateDepot", depot.getToDisplayDateDepot());
 		model.put("usernameEtudiant", depot.getEtudiant().getUsername());
 		model.put("emailEtudiant", depot.getEtudiant().getEmail());
 
@@ -336,7 +337,7 @@ public class EmailSender {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("typeDepot", depot.getTypeDepot());
 		model.put("etatDepot", depot.getEtatDepot());
-		model.put("dateDepot", depot.getDateDepot());
+		model.put("dateDepot", depot.getToDisplayDateDepot());
 		model.put("usernameEncadrant", depot.getEtudiant().getEncadrant().getUsername());
 		model.put("emailEncadrant", depot.getEtudiant().getEncadrant().getEmail());
 		
@@ -360,7 +361,7 @@ public class EmailSender {
 		return depot;
 	}
 	
-	@RequestMapping("/getdetailsAffectationToEtudiant")
+	@RequestMapping("/getdetailsAffectationToEtudiant/{encadrant_id}/{etudiant_id}")
 	public @ResponseBody User sendMailAffectationToEtudiant(@PathVariable Long encadrant_id, @PathVariable Long etudiant_id) throws Exception {
 
 		MimeMessage message = sender.createMimeMessage();
@@ -389,7 +390,7 @@ public class EmailSender {
 		return encadrant;
 	}
 	
-	@RequestMapping("/getdetailsAffectationToEncadrant")
+	@RequestMapping("/getdetailsAffectationToEncadrant/{etudiant_id}")
 	public @ResponseBody User sendMailAffectationToEncadrant(@PathVariable Long etudiant_id) throws Exception {
 
 		MimeMessage message = sender.createMimeMessage();

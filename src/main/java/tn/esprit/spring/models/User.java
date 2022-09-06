@@ -27,7 +27,6 @@ public class User {
 	private String username;
 
 	@NotBlank
-	//@Size(max = 50)
 	@Email
 	private String email;
 
@@ -44,8 +43,6 @@ public class User {
 	@JsonIgnore
     @ManyToOne
     private User encadrant;
-	/*@OneToMany(mappedBy = "encadrant")
-	private List<User> listStudents;*/
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
@@ -55,6 +52,10 @@ public class User {
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "demandeDeStage_id", referencedColumnName = "id")
     private DocumentsDeStage demandeDeStage;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "commentateur", cascade = CascadeType.ALL)
+    private List<Commentaire> listCommentaires;
 
 	public User() {
 	}
@@ -120,14 +121,6 @@ public class User {
 		this.encadrant = encadrant;
 	}
 
-	/*public List<User> getListStudents() {
-		return listStudents;
-	}
-
-	public void setListStudents(List<User> listStudents) {
-		this.listStudents = listStudents;
-	}*/
-
 	public List<Depot> getListDepots() {
 		return listDepots;
 	}
@@ -142,6 +135,14 @@ public class User {
 
 	public void setDemandeDeStage(DocumentsDeStage demandeDeStage) {
 		this.demandeDeStage = demandeDeStage;
+	}
+
+	public List<Commentaire> getListCommentaires() {
+		return listCommentaires;
+	}
+
+	public void setListCommentaires(List<Commentaire> listCommentaires) {
+		this.listCommentaires = listCommentaires;
 	}
 	
 }

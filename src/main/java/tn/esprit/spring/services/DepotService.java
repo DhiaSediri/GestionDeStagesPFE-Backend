@@ -1,7 +1,8 @@
 package tn.esprit.spring.services;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -198,10 +199,17 @@ public class DepotService {
 	public Depot saveDepotConvention_de_stage(Long etudiantId) {
 
 		Depot depot = new Depot();
+		
 		depot.setTypeDepot(TypeDepot.Convention_de_stage);
 		depot.setEtatDepot(Etat.DEPOSEE);
-		depot.setDateDepot(new Date());
-
+		
+		LocalDateTime myDateObj = LocalDateTime.now();
+		depot.setToOrderDateDepot(myDateObj);
+		
+	    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+	    String formattedDate = myDateObj.format(myFormatObj);
+	    depot.setToDisplayDateDepot(formattedDate);
+		
 		List<Depot> listDepots = new ArrayList<Depot>();
 		listDepots.add(depot);
 
@@ -217,9 +225,16 @@ public class DepotService {
 	public Depot saveDepotFiche_de_stage(Long etudiantId) {
 
 		Depot depot = new Depot();
+		
 		depot.setTypeDepot(TypeDepot.Fiche_de_stage);
 		depot.setEtatDepot(Etat.DEPOSEE);
-		depot.setDateDepot(new Date());
+		
+		LocalDateTime myDateObj = LocalDateTime.now();
+		depot.setToOrderDateDepot(myDateObj);
+		
+	    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+	    String formattedDate = myDateObj.format(myFormatObj);
+	    depot.setToDisplayDateDepot(formattedDate);
 
 		List<Depot> listDepots = new ArrayList<Depot>();
 		listDepots.add(depot);
@@ -236,9 +251,16 @@ public class DepotService {
 	public Depot saveDepotBilan_périodique_début_du_stage(Long etudiantId) {
 
 		Depot depot = new Depot();
+		
 		depot.setTypeDepot(TypeDepot.Bilan_périodique_début_du_stage);
 		depot.setEtatDepot(Etat.DEPOSEE);
-		depot.setDateDepot(new Date());
+		
+		LocalDateTime myDateObj = LocalDateTime.now();
+		depot.setToOrderDateDepot(myDateObj);
+		
+	    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+	    String formattedDate = myDateObj.format(myFormatObj);
+	    depot.setToDisplayDateDepot(formattedDate);
 
 		List<Depot> listDepots = new ArrayList<Depot>();
 		listDepots.add(depot);
@@ -255,9 +277,16 @@ public class DepotService {
 	public Depot saveDepotBilan_périodique_milieu_du_stage(Long etudiantId) {
 
 		Depot depot = new Depot();
+		
 		depot.setTypeDepot(TypeDepot.Bilan_périodique_milieu_du_stage);
 		depot.setEtatDepot(Etat.DEPOSEE);
-		depot.setDateDepot(new Date());
+		
+		LocalDateTime myDateObj = LocalDateTime.now();
+		depot.setToOrderDateDepot(myDateObj);
+		
+	    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+	    String formattedDate = myDateObj.format(myFormatObj);
+	    depot.setToDisplayDateDepot(formattedDate);
 
 		List<Depot> listDepots = new ArrayList<Depot>();
 		listDepots.add(depot);
@@ -274,9 +303,16 @@ public class DepotService {
 	public Depot saveDepotBilan_périodique_fin_du_stage(Long etudiantId) {
 
 		Depot depot = new Depot();
+		
 		depot.setTypeDepot(TypeDepot.Bilan_périodique_fin_du_stage);
 		depot.setEtatDepot(Etat.DEPOSEE);
-		depot.setDateDepot(new Date());
+		
+		LocalDateTime myDateObj = LocalDateTime.now();
+		depot.setToOrderDateDepot(myDateObj);
+		
+	    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+	    String formattedDate = myDateObj.format(myFormatObj);
+	    depot.setToDisplayDateDepot(formattedDate);
 
 		List<Depot> listDepots = new ArrayList<Depot>();
 		listDepots.add(depot);
@@ -293,9 +329,16 @@ public class DepotService {
 	public Depot saveDepotRapport_premiere_version(Long etudiantId) {
 
 		Depot depot = new Depot();
+		
 		depot.setTypeDepot(TypeDepot.Rapport_premiere_version);
 		depot.setEtatDepot(Etat.DEPOSEE);
-		depot.setDateDepot(new Date());
+		
+		LocalDateTime myDateObj = LocalDateTime.now();
+		depot.setToOrderDateDepot(myDateObj);
+		
+	    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+	    String formattedDate = myDateObj.format(myFormatObj);
+	    depot.setToDisplayDateDepot(formattedDate);
 
 		List<Depot> listDepots = new ArrayList<Depot>();
 		listDepots.add(depot);
@@ -312,9 +355,16 @@ public class DepotService {
 	public Depot saveDepotRapport_version_finale(Long etudiantId) {
 
 		Depot depot = new Depot();
+		
 		depot.setTypeDepot(TypeDepot.Rapport_version_finale);
 		depot.setEtatDepot(Etat.DEPOSEE);
-		depot.setDateDepot(new Date());
+		
+		LocalDateTime myDateObj = LocalDateTime.now();
+		depot.setToOrderDateDepot(myDateObj);
+		
+	    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+	    String formattedDate = myDateObj.format(myFormatObj);
+	    depot.setToDisplayDateDepot(formattedDate);
 
 		List<Depot> listDepots = new ArrayList<Depot>();
 		listDepots.add(depot);
@@ -331,9 +381,16 @@ public class DepotService {
 	public Depot saveDepotJournal_de_stage(Long etudiantId) {
 
 		Depot depot = new Depot();
+		
 		depot.setTypeDepot(TypeDepot.Journal_de_stage);
 		depot.setEtatDepot(Etat.DEPOSEE);
-		depot.setDateDepot(new Date());
+		
+		LocalDateTime myDateObj = LocalDateTime.now();
+		depot.setToOrderDateDepot(myDateObj);
+		
+	    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+	    String formattedDate = myDateObj.format(myFormatObj);
+	    depot.setToDisplayDateDepot(formattedDate);
 
 		List<Depot> listDepots = new ArrayList<Depot>();
 		listDepots.add(depot);

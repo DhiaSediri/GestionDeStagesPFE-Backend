@@ -1,5 +1,7 @@
 package tn.esprit.spring.models;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -26,20 +28,16 @@ public class DocumentsDeStage {
 	private String nom_prenomEtudiant;
 	
 	@NotBlank
-	//@Size(max = 50)
 	@Email
 	private String emailEtudiant;
 	
 	@NotBlank
-	@Size(max = 100)
 	private String optionEtudiant;
 	
 	@NotBlank
-	@Size(max = 100)	
 	private String nomSociete;
 	
 	@NotBlank
-	@Size(max = 100)	
 	private String adresseSociete;
 	
 	@NotBlank
@@ -47,7 +45,6 @@ public class DocumentsDeStage {
 	private String telephoneSociete;
 	
 	@NotBlank
-	//@Size(max = 50)
 	@Email
 	private String emailSociete;
 	
@@ -59,16 +56,17 @@ public class DocumentsDeStage {
 	@Size(max = 50)
 	private String encadrantAcademique;
 	
-	@Temporal(TemporalType.DATE)
-	private Date dateDebutStage;
+	/*@Temporal(TemporalType.DATE)
+	private Date dateDebutStage;*/
+	private LocalDate dateDebutStage;
 	
-	@Temporal (TemporalType.DATE)
-	private Date dateFinStage;
+	/*@Temporal (TemporalType.DATE)
+	private Date dateFinStage;*/
+	private LocalDate dateFinStage;
 	
 	private Etat etatDemande;
 	
-	@Temporal (TemporalType.DATE)
-	private Date dateDemande;
+	private LocalDateTime dateDemande;
 	
 	@OneToOne(mappedBy = "demandeDeStage")
     private User etudiant;
@@ -76,7 +74,7 @@ public class DocumentsDeStage {
 	public DocumentsDeStage() {}
 
 	public DocumentsDeStage(String nom_prenomEtudiant, String emailEtudiant, String optionEtudiant, String nomSociete, String adresseSociete, String telephoneSociete, 
-			String emailSociete, String encadrantSociete, String encadrantAcademique, Date dateDebutStage, Date dateFinStage, Etat etatDemande, Date dateDemande) {
+			String emailSociete, String encadrantSociete, String encadrantAcademique, LocalDate dateDebutStage, LocalDate dateFinStage, Etat etatDemande, LocalDateTime dateDemande) {
 		this.nom_prenomEtudiant = nom_prenomEtudiant;
 		this.emailEtudiant = emailEtudiant;
 		this.optionEtudiant = optionEtudiant;
@@ -172,19 +170,19 @@ public class DocumentsDeStage {
 		this.encadrantAcademique = encadrantAcademique;
 	}
 
-	public Date getDateDebutStage() {
+	public LocalDate getDateDebutStage() {
 		return dateDebutStage;
 	}
 
-	public void setDateDebutStage(Date dateDebutStage) {
+	public void setDateDebutStage(LocalDate dateDebutStage) {
 		this.dateDebutStage = dateDebutStage;
 	}
 
-	public Date getDateFinStage() {
+	public LocalDate getDateFinStage() {
 		return dateFinStage;
 	}
 
-	public void setDateFinStage(Date dateFinStage) {
+	public void setDateFinStage(LocalDate dateFinStage) {
 		this.dateFinStage = dateFinStage;
 	}
 
@@ -196,11 +194,11 @@ public class DocumentsDeStage {
 		this.etatDemande = etatDemande;
 	}
 
-	public Date getDateDemande() {
+	public LocalDateTime getDateDemande() {
 		return dateDemande;
 	}
 
-	public void setDateDemande(Date dateDemande) {
+	public void setDateDemande(LocalDateTime dateDemande) {
 		this.dateDemande = dateDemande;
 	}
 

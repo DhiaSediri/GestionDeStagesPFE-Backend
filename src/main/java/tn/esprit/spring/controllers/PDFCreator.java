@@ -59,8 +59,10 @@ public class PDFCreator {
 
 		SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
 
-		context.setVariable("dateDebutStage", s.format(documentsDeStage.getDateDebutStage()));
-		context.setVariable("dateFinStage", s.format(documentsDeStage.getDateFinStage()));
+		/*context.setVariable("dateDebutStage", s.format(documentsDeStage.getDateDebutStage()));
+		context.setVariable("dateFinStage", s.format(documentsDeStage.getDateFinStage()));*/
+		context.setVariable("dateDebutStage", documentsDeStage.getDateDebutStage());
+		context.setVariable("dateFinStage", documentsDeStage.getDateFinStage());
 
 		Date dateActuelle = new Date();
 		context.setVariable("dateActuelle", s.format(dateActuelle));
@@ -99,8 +101,10 @@ public class PDFCreator {
 
 		SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
 
-		context.setVariable("dateDebutStage", s.format(documentsDeStage.getDateDebutStage()));
-		context.setVariable("dateFinStage", s.format(documentsDeStage.getDateFinStage()));
+		/*context.setVariable("dateDebutStage", s.format(documentsDeStage.getDateDebutStage()));
+		context.setVariable("dateFinStage", s.format(documentsDeStage.getDateFinStage()));*/
+		context.setVariable("dateDebutStage", documentsDeStage.getDateDebutStage());
+		context.setVariable("dateFinStage", documentsDeStage.getDateFinStage());
 
 		Date dateActuelle = new Date();
 		context.setVariable("dateActuelle", s.format(dateActuelle));
@@ -139,8 +143,10 @@ public class PDFCreator {
 
 		SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
 
-		context.setVariable("dateDebutStage", s.format(documentsDeStage.getDateDebutStage()));
-		context.setVariable("dateFinStage", s.format(documentsDeStage.getDateFinStage()));
+		/*context.setVariable("dateDebutStage", s.format(documentsDeStage.getDateDebutStage()));
+		context.setVariable("dateFinStage", s.format(documentsDeStage.getDateFinStage()));*/
+		context.setVariable("dateDebutStage", documentsDeStage.getDateDebutStage());
+		context.setVariable("dateFinStage", documentsDeStage.getDateFinStage());
 
 		Date dateActuelle = new Date();
 		context.setVariable("dateActuelle", s.format(dateActuelle));

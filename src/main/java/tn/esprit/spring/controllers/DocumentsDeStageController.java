@@ -1,7 +1,8 @@
 package tn.esprit.spring.controllers;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,19 @@ public class DocumentsDeStageController {
 	@Autowired
 	UserService userService;
 	
+	// Vérifier si la durée du stage est supèrieure ou égale à 6 mois 
+	@PostMapping("/verifierDureeDeStage")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public Boolean verifierDureeDeStage(@RequestBody DocumentsDeStage documentsDeStage){
+		
+		Boolean test = false;	
+		int dureeDeStage = documentsDeStageService.verifierDureeDeStage(documentsDeStage);
+		if(dureeDeStage >= 6) {
+			test = true;
+		}
+		return test;	
+	}
+	
 	@GetMapping("/getDocumentsDeStageListParRecherche/{mots_cles}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public List<DocumentsDeStage> fetchgetDocumentsDeStageListParRecherche(@PathVariable String mots_cles) {
@@ -41,8 +55,10 @@ public class DocumentsDeStageController {
 		List<DocumentsDeStage> documentsDeStageListParRecherche = new ArrayList<DocumentsDeStage>();
 		
 		for (DocumentsDeStage documentsDeStage : documentsDeStageList) {
-			if(documentsDeStage.getNom_prenomEtudiant().contains(mots_cles) || documentsDeStage.getEmailEtudiant().contains(mots_cles) || documentsDeStage.getEncadrantAcademique().contains(mots_cles)) {	
+			if(documentsDeStage.getNom_prenomEtudiant().contains(mots_cles) || String.valueOf(documentsDeStage.getDateDemande()).contains(mots_cles)) {	
 				documentsDeStageListParRecherche.add(documentsDeStage);
+				
+				Collections.sort(documentsDeStageListParRecherche, (o1, o2) -> o1.getDateDemande().compareTo(o2.getDateDemande()));
 			}	
 		}
 		return documentsDeStageListParRecherche;
@@ -54,6 +70,9 @@ public class DocumentsDeStageController {
 			
 		List<DocumentsDeStage> documentsDeStageList = new ArrayList<DocumentsDeStage>();	
 		documentsDeStageList = documentsDeStageService.fetchDocumentsDeStageList();
+		
+		Collections.sort(documentsDeStageList, (o1, o2) -> o1.getDateDemande().compareTo(o2.getDateDemande()));
+		
 		return documentsDeStageList;
 	}
 	
@@ -62,7 +81,10 @@ public class DocumentsDeStageController {
 	public DocumentsDeStage saveDocumentsDeStage(@RequestBody DocumentsDeStage documentsDeStage){
 		
 		documentsDeStage.setEtatDemande(Etat.DEPOSEE);
-		documentsDeStage.setDateDemande(new Date());
+		
+		LocalDateTime myDateObj = LocalDateTime.now();
+		documentsDeStage.setDateDemande(myDateObj);
+				
 		System.out.println(documentsDeStage.getEmailEtudiant());
 		User etudiant = userService.fetchUserByEmail(documentsDeStage.getEmailEtudiant()).get();
 		System.out.println(etudiant.getId());

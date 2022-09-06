@@ -1,5 +1,7 @@
 package tn.esprit.spring.services;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +16,15 @@ public class DocumentsDeStageService {
 
 	@Autowired
 	DocumentsDeStageRepository documentsDeStageRepository;
+	
+	// Vérifier si la durée du stage est supèrieure ou égale à 6 mois 
+	public int verifierDureeDeStage(DocumentsDeStage documentsDeStage) {
+			
+		Period diff = Period.between(documentsDeStage.getDateDebutStage(),documentsDeStage.getDateFinStage());
+		System.out.println("Months : " + diff.getMonths());
+		
+		return diff.getMonths();
+	}
 
 	public List<DocumentsDeStage> fetchDocumentsDeStageList() {
 
@@ -41,13 +52,6 @@ public class DocumentsDeStageService {
 		}
 		return result;
 	}
-	
-	/*public int testerDureeStage(DocumentsDeStage documentsDeStage) {
-	
-		int months = MONTHS.between(documentsDeStage.getDateDebutStage(), documentsDeStage.getDateFinStage());
-	
-	return months;
-	}*/
 
 	public List<DocumentsDeStage> fetchListDocumentsDeStageDEPOSEE() {
 

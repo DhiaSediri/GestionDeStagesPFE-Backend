@@ -1,14 +1,12 @@
 package tn.esprit.spring.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Depot {
@@ -23,18 +21,20 @@ public class Depot {
 	//@NotBlank
 	private Etat etatDepot;
 	
-	@Temporal (TemporalType.DATE)
-	public Date dateDepot;
+	private LocalDateTime toOrderDateDepot;
+	
+	private String toDisplayDateDepot;
 	
 	@ManyToOne
 	private User etudiant;
-
+	
 	public Depot() {}
 
-	public Depot(TypeDepot typeDepot, Etat etatDepot, Date dateDepot) {
+	public Depot(TypeDepot typeDepot, Etat etatDepot, LocalDateTime toOrderDateDepot, String toDisplayDateDepot) {
 		this.typeDepot = typeDepot;
 		this.etatDepot = etatDepot;
-		this.dateDepot = dateDepot;
+		this.toOrderDateDepot = toOrderDateDepot;
+		this.toDisplayDateDepot = toDisplayDateDepot;
 	}
 
 	public int getId() {
@@ -61,12 +61,20 @@ public class Depot {
 		this.etatDepot = etatDepot;
 	}
 
-	public Date getDateDepot() {
-		return dateDepot;
+	public LocalDateTime getToOrderDateDepot() {
+		return toOrderDateDepot;
 	}
 
-	public void setDateDepot(Date dateDepot) {
-		this.dateDepot = dateDepot;
+	public void setToOrderDateDepot(LocalDateTime toOrderDateDepot) {
+		this.toOrderDateDepot = toOrderDateDepot;
+	}
+
+	public String getToDisplayDateDepot() {
+		return toDisplayDateDepot;
+	}
+
+	public void setToDisplayDateDepot(String toDisplayDateDepot) {
+		this.toDisplayDateDepot = toDisplayDateDepot;
 	}
 
 	public User getEtudiant() {

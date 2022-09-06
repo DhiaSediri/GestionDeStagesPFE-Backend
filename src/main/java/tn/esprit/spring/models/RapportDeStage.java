@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Entity
 public class RapportDeStage {
@@ -21,14 +20,13 @@ public class RapportDeStage {
 	private String session;
 
 	@NotBlank
-	@Size(max = 20)
 	private String encadrant;
 
 	public RapportDeStage() {
 	}
 
 	public RapportDeStage(@NotBlank String option, @NotBlank String session,
-			@NotBlank @Size(max = 20) String encadrant) {
+			@NotBlank String encadrant) {
 		super();
 		this.option = option;
 		this.session = session;

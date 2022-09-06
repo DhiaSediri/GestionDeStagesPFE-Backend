@@ -1,6 +1,8 @@
 package tn.esprit.spring;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -15,6 +17,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import tn.esprit.spring.models.ERole;
+import tn.esprit.spring.models.Role;
+import tn.esprit.spring.models.User;
 import tn.esprit.spring.repositories.UserRepository;
 
 @SpringBootApplication
@@ -51,7 +56,7 @@ public class AuthenticationApplication implements ApplicationRunner {
 		/*Role academic_SupervisorRole = roleRepository.findByName(ERole.Academic_Supervisor).get();
 		Set<Role> roles= new HashSet<Role>();
 		roles.add(academic_SupervisorRole);
-		User academic_Supervisor = new User("encadrantencadrant", "sediridhia@gmail.com", encoder.encode("encadrant"), roles); 	
+		User academic_Supervisor = new User("encadrantencadrant", "sediridhia@gmail.com", encoder.encode("encadrantencadrant"), roles); 	
 		userRepository.save(academic_Supervisor);*/
 		
 	}

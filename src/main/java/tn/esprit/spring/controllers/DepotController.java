@@ -1,6 +1,7 @@
 package tn.esprit.spring.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,11 @@ public class DepotController {
 		List<Depot> convention_de_stageListParRecherche = new ArrayList<Depot>();
 		
 		for (Depot convention_de_stage : convention_de_stageList) {
-			if(convention_de_stage.getEtudiant().getUsername().contains(mots_cles) || convention_de_stage.getEtudiant().getEmail().contains(mots_cles)) {	
-				convention_de_stageListParRecherche.add(convention_de_stage);
+			if(convention_de_stage.getEtudiant().getUsername().contains(mots_cles) || convention_de_stage.getEtudiant().getEmail().contains(mots_cles)
+					|| String.valueOf(convention_de_stage.getToOrderDateDepot()).contains(mots_cles)) {	
+				convention_de_stageListParRecherche.add(convention_de_stage);	
+				
+				Collections.sort(convention_de_stageListParRecherche, (o1, o2) -> o1.getToOrderDateDepot().compareTo(o2.getToOrderDateDepot()));
 			}	
 		}
 		return convention_de_stageListParRecherche;
@@ -56,6 +60,7 @@ public class DepotController {
 
 		List<Depot> depotConvention_de_stageList = new ArrayList<Depot>();
 		depotConvention_de_stageList = depotService.fetchDepotConvention_de_stageList();
+		Collections.sort(depotConvention_de_stageList, (o1, o2) -> o1.getToOrderDateDepot().compareTo(o2.getToOrderDateDepot()));
 		return depotConvention_de_stageList;
 	}
 
@@ -65,6 +70,7 @@ public class DepotController {
 
 		List<Depot> depotList = new ArrayList<Depot>();
 		depotList = depotService.fetchDepotList();
+		Collections.sort(depotList, (o1, o2) -> o1.getToOrderDateDepot().compareTo(o2.getToOrderDateDepot()));
 		return depotList;
 	}
 	
@@ -256,6 +262,8 @@ public class DepotController {
 		for (Depot convention_de_stage : listConvention_de_stageDEPOSEE) {
 			if(convention_de_stage.getEtudiant().getUsername().contains(mots_cles) || convention_de_stage.getEtudiant().getEmail().contains(mots_cles)) {	
 				listConvention_de_stageDEPOSEEParRecherche.add(convention_de_stage);
+				
+				Collections.sort(listConvention_de_stageDEPOSEEParRecherche, (o1, o2) -> o1.getToOrderDateDepot().compareTo(o2.getToOrderDateDepot()));
 			}	
 		}
 		return listConvention_de_stageDEPOSEEParRecherche;
@@ -267,10 +275,11 @@ public class DepotController {
 
 		List<Depot> depotConvention_de_stageDEPOSEEList = new ArrayList<Depot>();
 		depotConvention_de_stageDEPOSEEList = depotService.fetchDepotConvention_de_stageDEPOSEEList();
+		Collections.sort(depotConvention_de_stageDEPOSEEList, (o1, o2) -> o1.getToOrderDateDepot().compareTo(o2.getToOrderDateDepot()));
 		return depotConvention_de_stageDEPOSEEList;
 	}
 
-	@PostMapping("/accepterDepotConventionDeStage/{depot_id}")
+	@GetMapping("/accepterDepotConventionDeStage/{depot_id}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Depot accepterDepotConventionDeStage(@PathVariable int depot_id) {
 
@@ -279,7 +288,7 @@ public class DepotController {
 		return depotService.updateEtatDepot(depotConventionDeStage);
 	}
 
-	@PostMapping("/refuserDepotConventionDeStage/{depot_id}")
+	@GetMapping("/refuserDepotConventionDeStage/{depot_id}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Depot refuserDepotConventionDeStage(@PathVariable int depot_id) {
 

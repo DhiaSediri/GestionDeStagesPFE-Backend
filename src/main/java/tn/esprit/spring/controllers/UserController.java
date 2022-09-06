@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.esprit.spring.models.Role;
 import tn.esprit.spring.models.User;
 import tn.esprit.spring.repositories.RoleRepository;
 import tn.esprit.spring.repositories.UserRepository;
@@ -50,10 +51,18 @@ public class UserController {
 		List<User> userListParRecherche = new ArrayList<User>();
 		
 		for (User user : userList) {
-			if(user.getUsername().contains(mots_cles) || user.getEmail().contains(mots_cles)) {	
+			
+			for (Role role : user.getRoles()) {
+				if(String.valueOf(role.getName()).contains(mots_cles)) {
+					userListParRecherche.add(user);
+				}
+			}
+			
+			if(user.getUsername().contains(mots_cles)|| user.getEmail().contains(mots_cles)) {	
 				userListParRecherche.add(user);
 			}	
 		}
+		
 		return userListParRecherche;
 	}
 
